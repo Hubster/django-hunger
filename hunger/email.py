@@ -23,6 +23,9 @@ def beta_invite(email, code, request, **kwargs):
         'invite_url',
         request.build_absolute_uri(reverse('hunger-verify', args=[code]))
     )
+    context_dict['http_host'] = request.META.get('HTTP_HOST')
+    context_dict['invite_code'] = code
+
     context = Context(context_dict)
 
     templates_folder = setting('HUNGER_EMAIL_TEMPLATES_DIR')
